@@ -2,7 +2,7 @@
 #include <stdint.h>
 #include "MK64F12.h"
 
-#define default_time 655350
+#define default_time 1000000
 
 void delay(int32_t delay_time) {
 	for(int32_t decrementer = delay_time; decrementer > 0; decrementer--) {
@@ -24,6 +24,18 @@ void green_on() {
 	GPIOB->PSOR |= (1<<22);
 	GPIOB->PSOR |= (1<<21);
 	GPIOE->PCOR |= (1<<26);
+}
+
+void white_toggle(){
+	GPIOB->PTOR |= (1<<22);
+	GPIOB->PTOR |= (1<<21);
+	GPIOE->PTOR |= (1<<26);
+}
+
+void all_off(){
+	GPIOB->PSOR |= (1<<22);
+	GPIOB->PSOR |= (1<<21);
+	GPIOE->PSOR |= (1<<26);
 }
 
 int main(void){
